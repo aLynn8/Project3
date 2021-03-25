@@ -15,15 +15,18 @@ namespace Project3.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private IMovieListRepository _repository;
+
+        public HomeController(ILogger<HomeController> logger, IMovieListRepository repository)
         {
             _logger = logger;
+            _repository = repository;
         }
 
         //Returns Index
         public IActionResult Index()
         {
-            return View();
+            return View(_repository.ApplicationResponses);
         }
 
         //Returns movie list from temp storage within MyMovies view
